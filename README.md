@@ -1,12 +1,14 @@
 # react-line-wrapping-input
 
-`<input type="text" />` elements don't wrap.
+`<input type="text">` elements don't wrap nor adjust their size to the content.
 
-`<textarea />` elements don't adjust to the content, and they allow line breaks.
+`<textarea>` elements wrap, but don't adjust their size to the content, and they allow line breaks.
 
-Sometimes, you need an input that wraps when the content is too long.
+Sometimes, you need an input that wraps when the content is too long, but you don't want line breaks.
 
-Sometimes, you need an input that wraps when the content is too long, but doesn't allow manual line breaks.
+This package provides just that, textarea-based. No need to mess around with contenteditable.
+
+<!-- TODO [Live demo](codesandbox URL) -->
 
 ## Installation
 
@@ -22,11 +24,12 @@ import LineWrappingInput from "react-line-wrapping-input";
 
 ```js
 <LineWrappingInput
-  {/* no required props */}
-  {/* you'll most likely need these for controlled inputs. You can also use onBlur and any other textarea props */}
-  value={...}
-  onChange={...}
-  {/* optional custom props, see below */}
+  {/*
+    No required props.
+    You'll probably want value and onChange for controlled inputs.
+    You can also use onBlur and any other textarea props.
+    There are some custom props too, see below.
+  */}
 />
 ```
 

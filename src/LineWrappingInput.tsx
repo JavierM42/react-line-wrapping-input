@@ -76,8 +76,8 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
           value={value}
           aria-multiline="false"
           style={{
-            border: "1px solid black",
-            padding: "2px",
+            border: 0,
+            padding: 0,
             font: "inherit",
             ...(props.style || {}),
             gridArea: "1 / 1 / 2 / 2",
@@ -93,8 +93,8 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
         <div
           className={`line-wrapping-input ${props.className || ""}`}
           style={{
-            border: "1px solid black",
-            padding: "2px",
+            border: 0,
+            padding: 0,
             font: "inherit",
             ...(props.style || {}),
             gridArea: "1 / 1 / 2 / 2",

@@ -77,6 +77,10 @@ The `suffix` optional prop renders some static text after the editable portion o
 
 The suffix is rendered in a `span` tag. Use the `suffixStyle` and/or `suffixClassName` props to style it if you need to.
 
+### readOnly
+
+In addition to `disabled` support, a `readOnly` boolean prop is included. This will unmount the textarea and show the static content instead. It can be useful when a disabled field is not desirable or if distinct _read-only_ and _disabled_ states are required.
+
 ### ref
 
 The `ref` to the textarea element is exposed via forwardRef. Use it only if you know what you're doing.

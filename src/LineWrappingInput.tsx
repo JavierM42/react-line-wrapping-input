@@ -16,6 +16,7 @@ type Props = Omit<HTMLProps<HTMLTextAreaElement>, "aria-multiline" | "rows"> & {
   suffix?: string;
   suffixClassName?: string;
   suffixStyle?: CSSProperties;
+  readOnly?: boolean;
 };
 
 const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
@@ -28,6 +29,7 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
       suffixStyle,
       blurOnLineBreak,
       onReturn,
+      readOnly,
       ...props
     },
     ref
@@ -70,26 +72,28 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
         className={`line-wrapping-input-container ${containerClassName || ""}`}
         style={{ ...containerStyle, display: "grid" }}
       >
-        <textarea
-          {...props}
-          className={`line-wrapping-input ${props.className || ""}`}
-          value={value}
-          aria-multiline="false"
-          style={{
-            border: 0,
-            padding: 0,
-            font: "inherit",
-            ...(props.style || {}),
-            gridArea: "1 / 1 / 2 / 2",
-            resize: "none",
-            overflow: "clip",
-            whiteSpace: "pre-wrap",
-            overflowWrap: "break-word",
-          }}
-          onChange={handleChange}
-          rows={1}
-          ref={ref}
-        />
+        {!readOnly && (
+          <textarea
+            {...props}
+            className={`line-wrapping-input ${props.className || ""}`}
+            value={value}
+            aria-multiline="false"
+            style={{
+              border: 0,
+              padding: 0,
+              font: "inherit",
+              ...(props.style || {}),
+              gridArea: "1 / 1 / 2 / 2",
+              resize: "none",
+              overflow: "clip",
+              whiteSpace: "pre-wrap",
+              overflowWrap: "break-word",
+            }}
+            onChange={handleChange}
+            rows={1}
+            ref={ref}
+          />
+        )}
         <div
           className={`line-wrapping-input ${props.className || ""}`}
           style={{
@@ -105,10 +109,8 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
           }}
         >
           <span
-            aria-hidden="true"
-            style={{
-              visibility: "hidden",
-            }}
+            aria-hidden={!readOnly}
+            style={{ visibility: readOnly ? "visible" : "hidden" }}
           >
             {value || props.placeholder}
           </span>

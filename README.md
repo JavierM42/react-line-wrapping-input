@@ -91,10 +91,6 @@ If you set `width: fit-content` to the container element (`.line-wrapping-input-
 
 ## Limitations and workarounds
 
-### Maximum rows
-
-There's no way to set the maximum amount of rows for the input. If you need the input not to expand past a certain point, set `max-height` (and most likely `overflow: auto`) on the container element (with the `.line-wrapping-input-container` selector, the `containerClassName` prop or the `containerStyle` prop).
-
 ### Arbitrarily long words
 
 The input will resize horizontally when a word is longer than the width. I haven't found any workarounds that don't break other features.
@@ -102,3 +98,13 @@ The input will resize horizontally when a word is longer than the width. I haven
 ### text-align and suffix
 
 The `suffix` prop will not display correctly when using `text-align: center` or `text-align: right`.
+
+### Maximum rows
+
+There's no way to set the maximum amount of rows for the input. If you need the input not to expand past a certain point, set `max-height` (and most likely `overflow: auto`) on the container element (with the `.line-wrapping-input-container` selector, the `containerClassName` prop or the `containerStyle` prop).
+
+If you do, my recommendation is to add any desired padding to the input and any desired borders to the container, that way the scrolling behavior will look better.
+
+> Some help with the math:
+> If you're using absolute values for all of these values including `line-height`: `max-height: PADDING_TOP + PADDING_BOTTOM + BORDER_TOP + BORDER_BOTTOM + DESIRED_MAX_LINES * LINE_HEIGHT` will do the trick (replace with your actual values).
+> If you're using a relative value for line height, you can use `calc([SUM_OF_VERTICAL_PADDINGS_AND_BORDERS]px + [DESIRED_MAX_LINES * LINE_HEIGHT * FONT_SIZE]em)`

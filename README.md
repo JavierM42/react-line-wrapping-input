@@ -91,3 +91,6 @@ The `ref` to the textarea element is exposed via forwardRef. Use it only if you 
 
 There's no way to set the maximum amount of rows for the input. If you need the input not to expand past a certain point, set `max-height` (and most likely `overflow: auto`) on the container element (with the `.line-wrapping-input-container` selector, the `containerClassName` prop or the `containerStyle` prop).
 
+### Arbitrarily long words
+
+The input will resize horizontally when a word is longer than the width. I haven't found any workarounds that don't break other features.

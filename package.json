@@ -1,0 +1,46 @@
+{
+  "name": "react-line-wrapping-input",
+  "version": "1.0.0",
+  "description": "A customizable input-like component that line wraps based on its content.",
+  "main": "lib/index.min.cjs",
+  "module": "lib/index.esm.js",
+  "license": "MIT",
+  "repository": "https://github.com/JavierM42/react-line-wrapping-input",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "build": "rollup -c",
+    "preview": "ladle serve"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "keywords": [
+    "react",
+    "input",
+    "wrap",
+    "line-wrap",
+    "component"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
+    "color": "^4.2.3",
+    "jest": "^27.2.4",
+    "rollup": "^2.79.1",
+    "typescript": "^4.8.4"
+  },
+  "author": "Javier Morales",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "@ladle/react": "^2.4.5"
+  }
+}

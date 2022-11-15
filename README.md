@@ -85,6 +85,10 @@ In addition to `disabled` support, a `readOnly` boolean prop is included. This w
 
 The `ref` to the textarea element is exposed via forwardRef. Use it only if you know what you're doing.
 
+### Growing horizontally
+
+If you set `width: fit-content` to the container element (`.line-wrapping-input-container`), you'll get an input that expands horizontally up to its `max-width` (if set), then wraps.
+
 ## Limitations and workarounds
 
 ### Maximum rows
@@ -94,3 +98,7 @@ There's no way to set the maximum amount of rows for the input. If you need the 
 ### Arbitrarily long words
 
 The input will resize horizontally when a word is longer than the width. I haven't found any workarounds that don't break other features.
+
+### text-align and suffix
+
+The `suffix` prop will not display correctly when using `text-align: center` or `text-align: right`.

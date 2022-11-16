@@ -1,5 +1,7 @@
 # react-line-wrapping-input
 
+![Demo GIF](./demo_gif.gif)
+
 `<input type="text">` elements don't wrap nor adjust their size to the content.
 
 `<textarea>` elements wrap, but don't adjust their size to the content, and they allow line breaks.
@@ -8,7 +10,7 @@ What about an input that wraps when the content is too long, but doesn't allow u
 
 No easy way to do that natively on the web. This package solves that using a neat trick and a `textarea` element. No need to mess around with `contenteditable`.
 
-[Live demo](https://codesandbox.io/s/react-line-wrapping-input-examples-k53r2b)
+**[Live demo](https://codesandbox.io/s/react-line-wrapping-input-examples-k53r2b)**
 
 ## Installation
 

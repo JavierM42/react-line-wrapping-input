@@ -12,6 +12,8 @@ export const Story = () => (
       textAlign: "left",
       border: 0,
       font: "inherit",
+      background: "transparent",
     }}
+    overlapTechnique="absolute"
   />
 );

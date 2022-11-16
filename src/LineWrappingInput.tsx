@@ -17,6 +17,7 @@ type Props = Omit<HTMLProps<HTMLTextAreaElement>, "aria-multiline" | "rows"> & {
   suffixClassName?: string;
   suffixStyle?: CSSProperties;
   readOnly?: boolean;
+  overlapTechnique?: "grid" | "absolute";
 };
 
 const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
@@ -30,6 +31,7 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
       blurOnLineBreak,
       onReturn,
       readOnly,
+      overlapTechnique = "grid",
       ...props
     },
     ref
@@ -70,7 +72,12 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
     return (
       <div
         className={`line-wrapping-input-container ${containerClassName || ""}`}
-        style={{ ...containerStyle, display: "grid" }}
+        style={{
+          ...containerStyle,
+          ...(overlapTechnique === "grid"
+            ? { display: "grid" }
+            : { position: "relative" }),
+        }}
       >
         {!readOnly && (
           <textarea
@@ -80,7 +87,11 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
             aria-multiline="false"
             style={{
               ...(props.style || {}),
-              gridArea: "1 / 1 / 2 / 2",
+              ...(overlapTechnique === "grid"
+                ? {
+                    gridArea: "1 / 1 / 2 / 2",
+                  }
+                : { inset: 0, position: "absolute" }),
               minWidth: 0,
               overflow: "clip",
               overflowWrap: "break-word",
@@ -96,7 +107,11 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
           className={`line-wrapping-input ${props.className || ""}`}
           style={{
             ...(props.style || {}),
-            gridArea: "1 / 1 / 2 / 2",
+            ...(overlapTechnique === "grid"
+              ? {
+                  gridArea: "1 / 1 / 2 / 2",
+                }
+              : {}),
             overflow: "clip",
             overflowWrap: "break-word",
             pointerEvents: "none",

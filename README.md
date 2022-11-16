@@ -39,10 +39,11 @@ Because of browser default styles, some CSS resets are required.
 
 ```css
 .line-wrapping-input {
-  text-align: "left", /* you can also use right or center here */
-  border: 0, /* removes default textarea border, add a border on the container if you want one */
-  padding: 0, /* removes default textarea padding, change 0 for your desired padding */
-  font: "inherit", /* you can set a font here if you wish */
+  border: 0; /* add a border on the container if you want one */
+  background: "transparent"; /* add a background on the container if you want one */
+  text-align: "left"; /* you may also use right or center here */
+  padding: 0; /* change 0 for your desired padding */
+  font: "inherit"; /* you may set a font here if you wish */
 }
 ```
 
@@ -70,10 +71,12 @@ You can add CSS rules to the built-in classes, supply your own, or use inline st
 
 ### Inline styles:
 
-- Use the `containerStyle` prop to add styles to the container. _`display: grid` cannot be overridden._
-- Use the `style` prop to add styles to the textarea and the invisible element. _The `grid-area`, `min-width`, `overflow`, `resize`, `overflow-wrap`, `resize` and `white-space` properties cannot be overridden._
+- Use the `containerStyle` prop to add styles to the container.
+- Use the `style` prop to add styles to the textarea and the invisible element.
 
 > A way to style just the `textarea` or the invisible element is not provided. The autosizing would break if they don't have matching styles.
+
+> Some extra inline styles will be added by the package, those are required for the component to work.
 
 ## Extras
 
@@ -105,23 +108,19 @@ In addition to the standard `disabled` prop, a `readOnly` boolean prop is includ
 
 The `ref` to the textarea element is exposed via `forwardRef`, if you need to access it for some reason.
 
+### overlapTechnique
+
+To overlap the textarea and the invisible element, the default behavior uses `display: grid` and overlapping grid areas. It can also be achieved with absolute positioning, if you prefer that you can use `overlapTechnique="absolute"`.
+
+## Tricks
+
 ### Growing the field horizontally
 
-If you set `width: fit-content` to the container element (`.line-wrapping-input-container`), you'll get an input that expands horizontally up to its `max-width` (if one is set) and then wraps to the next line.
-
-## Limitations and workarounds
-
-### Arbitrarily long words
-
-The input will resize horizontally when a single word is longer than its width. I haven't found any solutions for this problem that don't break other features.
-
-### text-align and suffix
-
-The `suffix` prop will not display correctly when using `text-align: center` or `text-align: right`.
+If you set `width: fit-content` to the container element (`.line-wrapping-input-container`), you'll get an input that expands horizontally up to its `max-width` (if one is set) and then wraps to the next line. Use `overlapTechnique="absolute"` for best results.
 
 ### Maximum rows
 
-There's no way to set the maximum amount of rows for the input. If you need the input not to expand past a certain point, set `max-height` (and most likely `overflow: auto`) on the container element (using the `.line-wrapping-input-container` selector, the `containerClassName` prop or the `containerStyle` prop).
+There's no straightforward way to set the maximum amount of rows for the input, but there's a trick you can use. Set `max-height` and `overflow: auto` on the container element (using the `.line-wrapping-input-container` selector, the `containerClassName` prop or the `containerStyle` prop) to the px value that matches the maximum number of lines you need.
 
 If you do, my recommendation is to add any desired padding to the input and any desired borders to the container, that way the scrolling behavior will look better.
 
@@ -132,3 +131,13 @@ If you're using an absolute value for line-height, you'll need `max-height: PADD
 If you're using a relative value for line-height, your absolute line height is LINE_HEIGHT times FONT_SIZE.
 
 You can use calc() if you need to mix units or reference CSS variables.
+
+## Known issues
+
+### Arbitrarily long words
+
+The input will resize horizontally when a single word is longer than its width. I haven't found any solutions for this problem that don't break other features.
+
+### text-align and suffix
+
+The `suffix` prop will not display correctly when using `text-align: center` or `text-align: right`.

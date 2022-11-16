@@ -8,7 +8,7 @@ What about an input that wraps when the content is too long, but doesn't allow u
 
 No easy way to do that natively on the web. This package solves that using a neat trick and a `textarea` element. No need to mess around with `contenteditable`.
 
-<!-- TODO [Live demo](codesandbox URL) -->
+[Live demo](https://codesandbox.io/s/react-line-wrapping-input-examples-k53r2b)
 
 ## Installation
 
@@ -76,9 +76,9 @@ You can add CSS rules to the built-in classes, supply your own, or use inline st
 
 > A way to style just the `textarea` or the invisible element is not provided. The autosizing would break if they don't have matching styles.
 
-> Some extra inline styles will be added by the package, those are required for the component to work.
+> Some more inline styles will be added by the package, those are required for the component to work.
 
-## Extras
+## Custom props
 
 There are a few extra features that you can take advantage of.
 

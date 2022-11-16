@@ -79,16 +79,13 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
             value={value}
             aria-multiline="false"
             style={{
-              minWidth: 0,
-              border: 0,
-              padding: 0,
-              font: "inherit",
               ...(props.style || {}),
               gridArea: "1 / 1 / 2 / 2",
-              resize: "none",
+              minWidth: 0,
               overflow: "clip",
-              whiteSpace: "pre-wrap",
               overflowWrap: "break-word",
+              resize: "none",
+              whiteSpace: "pre-wrap",
             }}
             onChange={handleChange}
             rows={1}
@@ -98,15 +95,12 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
         <div
           className={`line-wrapping-input ${props.className || ""}`}
           style={{
-            border: 0,
-            padding: 0,
-            font: "inherit",
             ...(props.style || {}),
             gridArea: "1 / 1 / 2 / 2",
-            whiteSpace: "pre-wrap",
             overflow: "clip",
             overflowWrap: "break-word",
             pointerEvents: "none",
+            whiteSpace: "pre-wrap",
           }}
         >
           <span

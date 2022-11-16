@@ -8,7 +8,10 @@ export const Story = () => (
       border: "1px solid black",
     }}
     style={{
-      padding: "2px",
+      padding: "6px",
+      textAlign: "left",
+      border: 0,
+      font: "inherit",
     }}
   />
 );

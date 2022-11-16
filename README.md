@@ -33,6 +33,21 @@ import LineWrappingInput from "react-line-wrapping-input";
 />
 ```
 
+### Required styles
+
+Due to browser default styles, some CSS resets are required.
+
+```css
+.line-wrapping-input {
+  text-align: "left", /* you can also use right or center here */
+  border: 0, /* removes default textarea border, add a border on the container if you want one */
+  padding: 0, /* removes default textarea padding, change 0 for your desired padding */
+  font: "inherit", /* you can set a font here if you wish */
+}
+```
+
+Make sure these styles are applied, you can add this to your CSS file, use custom classes or inline styles (read the **Styling** section).
+
 ## How it works
 
 It renders a `div` element with `display: grid` and a `textarea` child, as well as another `div` that overlaps it. This `div` renders the textarea's content too (but invisible!), and since divs automatically resize according to their content, the textarea does as well.
@@ -56,7 +71,7 @@ You can add CSS rules to the built-in classes, supply your own, or use inline st
 ### Inline styles:
 
 - Use the `containerStyle` prop to add styles to the container. _`display: grid` cannot be overridden._
-- Use the `style` prop to add styles to the textarea and the invisible element. _The `grid-area`, `resize`, `white-space` and `overflow-wrap` properties cannot be overridden._
+- Use the `style` prop to add styles to the textarea and the invisible element. _The `grid-area`, `min-width`, `overflow`, `resize`, `overflow-wrap`, `resize` and `white-space` properties cannot be overridden._
 
 > A way to style just the `textarea` or the invisible element is not provided. The autosizing would break if they don't have matching styles.
 

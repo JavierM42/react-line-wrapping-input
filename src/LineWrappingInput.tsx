@@ -114,7 +114,10 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
           >
             {value || props.placeholder}
           </span>
-          <span className={suffixClassName} style={suffixStyle}>
+          <span
+            className={`line-wrapping-input-suffix ${suffixClassName || ""}`}
+            style={suffixStyle}
+          >
             {suffix}
           </span>
         </div>

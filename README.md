@@ -4,9 +4,9 @@
 
 `<textarea>` elements wrap, but don't adjust their size to the content, and they allow line breaks.
 
-Sometimes, you need an input that wraps when the content is too long, but you don't want line breaks.
+What about an input that wraps when the content is too long, but doesn't allow user-entered line breaks?
 
-This package solves that problem, and does it based on a `textarea` element. No need to mess around with `contenteditable`.
+No easy way to do that natively on the web. This package solves that, using a neat trick and a `textarea` element. No need to mess around with `contenteditable`.
 
 <!-- TODO [Live demo](codesandbox URL) -->
 
@@ -48,17 +48,17 @@ You can add CSS rules to the built-in classes, supply your own, or use inline st
 - Use the `.line-wrapping-input-container` selector to style the container.
 - Use the `.line-wrapping-input` selecctor to style the textarea and the invisible element.
 
-### Supplying your own classes:
+### Add your own classes:
 
 - Use the `containerClassName` prop to add classes to the container.
 - Use the `className` prop to add classes to the textarea and the invisible element.
 
 ### Inline styles:
 
-- Use the `containerStyle` prop to add styles to the container. _`display: grid` cannot be overridden_
-- Use the `style` prop to add styles to the textarea and the invisible element. _`grid-area`, `resize`, `white-space` and `overflow-wrap` cannot be overridden._
+- Use the `containerStyle` prop to add styles to the container. _`display: grid` cannot be overridden._
+- Use the `style` prop to add styles to the textarea and the invisible element. _The `grid-area`, `resize`, `white-space` and `overflow-wrap` properties cannot be overridden._
 
-> A way to style only the textarea or the invisible element is not provided. The autosizing would break if they don't have matching styles.
+> A way to style just the `textarea` or the invisible element is not provided. The autosizing would break if they don't have matching styles.
 
 ## Extras
 
@@ -70,6 +70,8 @@ The `blurOnLineBreak` boolean prop will blur the input when the user presses the
 
 > On regular HTML text inputs, the return key doesn't behave like this, but I've found no way to prevent it.
 
+<!-- TODO find a way to prevent return key behavior -->
+
 ### onReturn
 
 If you want to do anything else when the user presses the return key (for example, submitting data), use the `onReturn` prop.
@@ -78,11 +80,11 @@ If you want to do anything else when the user presses the return key (for exampl
 
 The `suffix` optional prop renders some static text after the editable portion of the input. It can be useful for fields with units, such as "\_\_\_ minutes".
 
-The suffix is rendered in a `span` tag. Use the `suffixStyle` and/or `suffixClassName` props to style it if you need to.
+The suffix is rendered in a `span` tag. Use the `.line-wrapping-input-suffix` selector, the `suffixStyle` prop and/or the `suffixClassName` prop to style it if you need to.
 
 ### readOnly
 
-In addition to the standard `disabled` prop, a `readOnly` boolean prop is included. This will unmount the textarea and show the static content instead. It can be useful when a disabled field is not desirable or if distinct _read-only_ and _disabled_ states are required.
+In addition to the standard `disabled` prop, a `readOnly` boolean prop is included. This will unmount the `textarea` and show the static content instead. It can be useful when a disabled field is not desirable or if distinct _read-only_ and _disabled_ states are required.
 
 ### ref
 
@@ -96,7 +98,7 @@ If you set `width: fit-content` to the container element (`.line-wrapping-input-
 
 ### Arbitrarily long words
 
-The input will resize horizontally when a word is longer than its width. I haven't found any solutions for this problem that don't break other features.
+The input will resize horizontally when a single word is longer than its width. I haven't found any solutions for this problem that don't break other features.
 
 ### text-align and suffix
 
@@ -108,8 +110,14 @@ There's no way to set the maximum amount of rows for the input. If you need the 
 
 If you do, my recommendation is to add any desired padding to the input and any desired borders to the container, that way the scrolling behavior will look better.
 
-> Some help with the math:
+**Max rows math cheathseet**
 
-> If you're using absolute values for all of these values including `line-height`: `max-height: PADDING_TOP + PADDING_BOTTOM + BORDER_TOP + BORDER_BOTTOM + DESIRED_MAX_LINES * LINE_HEIGHT` will do the trick (replace with your actual values).
+```
+If you're using an absolute value for line-height:
 
-> If you're using a relative value for line height, you can use `calc([SUM_OF_VERTICAL_PADDINGS_AND_BORDERS]px + [DESIRED_MAX_LINES * LINE_HEIGHT * FONT_SIZE]em)`
+max-height: PADDING_TOP + PADDING_BOTTOM + BORDER_TOP + BORDER_BOTTOM + DESIRED_MAX_LINES * LINE_HEIGHT
+
+If you're using a relative value for line-height, your absolute line height is LINE_HEIGHT times FONT_SIZE.
+
+You can use calc() if you need to mix units or reference CSS variables.
+```

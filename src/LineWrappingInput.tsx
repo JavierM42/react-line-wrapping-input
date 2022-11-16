@@ -74,6 +74,7 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
         className={`line-wrapping-input-container ${containerClassName || ""}`}
         style={{
           ...containerStyle,
+          overflow: "auto",
           ...(overlapTechnique === "grid"
             ? { display: "grid" }
             : { position: "relative" }),

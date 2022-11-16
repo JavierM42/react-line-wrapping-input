@@ -134,10 +134,6 @@ You can use calc() if you need to mix units or reference CSS variables.
 
 ## Known issues
 
-### Arbitrarily long words
-
-The input will resize horizontally when a single word is longer than its width. I haven't found any solutions for this problem that don't break other features.
-
 ### text-align and suffix
 
 The `suffix` prop will not display correctly when using `text-align: center` or `text-align: right`.

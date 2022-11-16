@@ -6,7 +6,7 @@
 
 What about an input that wraps when the content is too long, but doesn't allow user-entered line breaks?
 
-No easy way to do that natively on the web. This package solves that, using a neat trick and a `textarea` element. No need to mess around with `contenteditable`.
+No easy way to do that natively on the web. This package solves that using a neat trick and a `textarea` element. No need to mess around with `contenteditable`.
 
 <!-- TODO [Live demo](codesandbox URL) -->
 
@@ -35,7 +35,7 @@ import LineWrappingInput from "react-line-wrapping-input";
 
 ### Required styles
 
-Due to browser default styles, some CSS resets are required.
+Because of browser default styles, some CSS resets are required.
 
 ```css
 .line-wrapping-input {
@@ -46,7 +46,7 @@ Due to browser default styles, some CSS resets are required.
 }
 ```
 
-Make sure these styles are applied, you can add this to your CSS file, use custom classes or inline styles (read the **Styling** section).
+Pasting the snippet into your CSS file will work, but you can use custom classes or inline styles instead if you prefer (read the **Styling** section).
 
 ## How it works
 
@@ -125,14 +125,10 @@ There's no way to set the maximum amount of rows for the input. If you need the 
 
 If you do, my recommendation is to add any desired padding to the input and any desired borders to the container, that way the scrolling behavior will look better.
 
-**Max rows math cheathseet**
+**Math cheathseet to get the max-height value**
 
-```
-If you're using an absolute value for line-height:
-
-max-height: PADDING_TOP + PADDING_BOTTOM + BORDER_TOP + BORDER_BOTTOM + DESIRED_MAX_LINES * LINE_HEIGHT
+If you're using an absolute value for line-height, you'll need `max-height: PADDING_TOP + PADDING_BOTTOM + BORDER_TOP + BORDER_BOTTOM + DESIRED_MAX_LINES * LINE_HEIGHT`.
 
 If you're using a relative value for line-height, your absolute line height is LINE_HEIGHT times FONT_SIZE.
 
 You can use calc() if you need to mix units or reference CSS variables.
-```

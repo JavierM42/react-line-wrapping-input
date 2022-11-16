@@ -1,6 +1,6 @@
 {
   "name": "react-line-wrapping-input",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A highly-customizable input-like component with line wrapping.",
   "main": "lib/index.cjs",
   "module": "lib/index.esm.js",

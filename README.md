@@ -53,7 +53,7 @@ Pasting the snippet into your CSS file will work, but you can use custom classes
 
 ## How it works
 
-It renders a `div` element with `display: grid` and a `textarea` child, as well as another `div` that overlaps it. This `div` renders the textarea's content too (but invisible!), and since divs automatically resize according to their content, the textarea does as well.
+It renders a `div` element with two overlapping children: a `textarea` and another `div`. The inner `div` renders the textarea's content too (but it's invisible!), and since divs automatically resize according to their content, the textarea does as well.
 
 This solution is inspired by [this CSS tricks article](https://css-tricks.com/the-cleanest-trick-for-autogrowing-textareas/), with the added feature of emulating a single-line input by stripping line breaks.
 
@@ -82,23 +82,23 @@ You can add CSS rules to the built-in classes, supply your own, or use inline st
 
 ## Custom props
 
-There are a few extra features that you can take advantage of.
+Apart from all textarea props except for `rows`, there are a few extra features you can take advantage of.
 
 ### blurOnLineBreak
 
-The `blurOnLineBreak` boolean prop will blur the input when the user presses the `return` key. Otherwise, the return key will move the cursor to the end of the content.
+Set `blurOnLineBreak={true}` to blur the input when the user presses the `return` key. Otherwise, the return key will move the cursor to the end of the content.
 
-> On regular HTML text inputs, the return key doesn't behave like this, but I've found no way to prevent it.
+> On regular HTML text inputs, the return key doesn't jump to the end, but I've found no way to prevent this.
 
 <!-- TODO find a way to prevent return key behavior -->
 
 ### onReturn
 
-If you want to do anything else when the user presses the return key (for example, submitting data), use the `onReturn` prop.
+If you want to do anything else when the user presses the return key (for example, submitting data), use the `onReturn` event.
 
 ### suffix
 
-The `suffix` optional prop renders some static text after the editable portion of the input. It can be useful for fields with units, such as "\_\_\_ minutes".
+The `suffix` prop renders some optional static text after the editable portion of the input. It can be useful for fields with units, such as "\_\_\_ minutes".
 
 The suffix is rendered in a `span` tag. Use the `.line-wrapping-input-suffix` selector, the `suffixStyle` prop and/or the `suffixClassName` prop to style it if you need to.
 
@@ -112,27 +112,31 @@ The `ref` to the textarea element is exposed via `forwardRef`, if you need to ac
 
 ### overlapTechnique
 
-To overlap the textarea and the invisible element, the default behavior uses `display: grid` and overlapping grid areas. It can also be achieved with absolute positioning, if you prefer that you can use `overlapTechnique="absolute"`.
+To overlap the textarea and the invisible element, the default behavior is to use `display: grid` and overlapping grid areas. An equilvaent result can be achieved with absolute positioning. If you prefer that you can use `overlapTechnique="absolute"`.
 
 ## Tricks
 
 ### Growing the field horizontally
 
-If you set `width: fit-content` to the container element (`.line-wrapping-input-container`), you'll get an input that expands horizontally up to its `max-width` (if one is set) and then wraps to the next line. Use `overlapTechnique="absolute"` for best results.
+If you set the container element (`.line-wrapping-input-container`) to have `width: fit-content`, you'll get an input that expands horizontally up to its `max-width` (if one is set) and then wraps over to the next line.
+
+Use `overlapTechnique="absolute"` for best results.
 
 ### Maximum rows
 
-There's no straightforward way to set the maximum amount of rows for the input, but there's a trick you can use. Set `max-height` and `overflow: auto` on the container element (using the `.line-wrapping-input-container` selector, the `containerClassName` prop or the `containerStyle` prop) to the px value that matches the maximum number of lines you need.
+There's no straightforward way to set the maximum amount of rows for the input, but there's a trick you can use.
 
-If you do, my recommendation is to add any desired padding to the input and any desired borders to the container, that way the scrolling behavior will look better.
+Set `max-height` and `overflow: auto` on the container element (using the `.line-wrapping-input-container` selector, the `containerClassName` prop or the `containerStyle` prop). The max-height should match the height that your maximum lines would have.
 
-**Math cheathseet to get the max-height value**
+Make sure your padding is on the input and your border is on the container, that way the scrolling behavior will look better.
 
-If you're using an absolute value for line-height, you'll need `max-height: PADDING_TOP + PADDING_BOTTOM + BORDER_TOP + BORDER_BOTTOM + DESIRED_MAX_LINES * LINE_HEIGHT`.
+**How to get the correct max-height value**
 
-If you're using a relative value for line-height, your absolute line height is LINE_HEIGHT times FONT_SIZE.
+If you're using an absolute value for `line-height`, you'll need `max-height: PADDING_TOP + PADDING_BOTTOM + BORDER_TOP + BORDER_BOTTOM + DESIRED_MAX_LINES * LINE_HEIGHT`.
 
-You can use calc() if you need to mix units or reference CSS variables.
+If you're using a relative value for `line-height`, your absolute line height is `LINE_HEIGHT` times `FONT_SIZE`.
+
+You can use `calc()` if you need to mix units or reference CSS variables.
 
 ## Known issues
 

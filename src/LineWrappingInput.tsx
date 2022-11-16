@@ -79,6 +79,7 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
             value={value}
             aria-multiline="false"
             style={{
+              minWidth: 0,
               border: 0,
               padding: 0,
               font: "inherit",

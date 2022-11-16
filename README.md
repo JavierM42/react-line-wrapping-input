@@ -6,7 +6,7 @@
 
 `<textarea>` elements wrap, but don't adjust their size to the content, and they allow line breaks.
 
-What about an input that wraps when the content is too long, but doesn't allow user-entered line breaks?
+What about an input that **wraps** when the content is too long, but **doesn't** allow user-entered line breaks?
 
 No easy way to do that natively on the web. This package solves that using a neat trick and a `textarea` element. No need to mess around with `contenteditable`.
 

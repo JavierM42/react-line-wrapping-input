@@ -18,6 +18,8 @@ type Props = Omit<HTMLProps<HTMLTextAreaElement>, "aria-multiline" | "rows"> & {
   suffixStyle?: CSSProperties;
   readOnly?: boolean;
   overlapTechnique?: "grid" | "absolute";
+  /** Preserves line breaks */
+  multiline?: boolean;
 };
 
 const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
@@ -32,6 +34,7 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
       onReturn,
       readOnly,
       overlapTechnique = "grid",
+      multiline,
       ...props
     },
     ref
@@ -41,9 +44,15 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
 
     const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
       (event) => {
-        const newValue = event.target.value.replace(/\r|\n/g, "");
+        // Strip line breaks when not multiline
+        const newValue = multiline
+          ? event.target.value
+          : event.target.value.replace(/\r|\n/g, "");
         // Override user typing line breaks. Doesn't fire if the line break was pasted, that's handled by the else block.
-        if ((event.nativeEvent as InputEvent).inputType === "insertLineBreak") {
+        if (
+          (event.nativeEvent as InputEvent).inputType === "insertLineBreak" &&
+          !multiline
+        ) {
           if (blurOnLineBreak) {
             event.target.blur();
           }
@@ -55,7 +64,6 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
             } as any,
           });
         } else {
-          // Strip line breaks (from pasted text or any other reason)
           props.onChange?.({
             ...event,
             target: {
@@ -85,13 +93,11 @@ const LineWrappingInput = forwardRef<HTMLTextAreaElement, Props>(
             {...props}
             className={`line-wrapping-input ${props.className || ""}`}
             value={value}
-            aria-multiline="false"
+            aria-multiline={multiline}
             style={{
               ...(props.style || {}),
               ...(overlapTechnique === "grid"
-                ? {
-                    gridArea: "1 / 1 / 2 / 2",
-                  }
+                ? { gridArea: "1 / 1 / 2 / 2" }
                 : { inset: 0, position: "absolute" }),
               minWidth: 0,
               overflow: "clip",

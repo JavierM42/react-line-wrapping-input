@@ -112,7 +112,7 @@ The `ref` to the textarea element is exposed via `forwardRef`, if you need to ac
 
 ### overlapTechnique
 
-To overlap the textarea and the invisible element, the default behavior is to use `display: grid` and overlapping grid areas. An equilvaent result can be achieved with absolute positioning. If you prefer that you can use `overlapTechnique="absolute"`.
+To overlap the textarea and the invisible element, the default behavior is to use `display: grid` and overlapping grid areas. An equivalent result can be achieved with absolute positioning. If you prefer that you can use `overlapTechnique="absolute"`.
 
 ## Tricks
 
